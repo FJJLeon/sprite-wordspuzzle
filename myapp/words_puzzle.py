@@ -1,7 +1,8 @@
+# -*- coding: UTF-8 -*-
 import json
 from collections import Counter
 
-sprite_data_url = "./SpriteData.json"
+sprite_data_url = "SpriteData.json"
 
 
 def loads_sprite():

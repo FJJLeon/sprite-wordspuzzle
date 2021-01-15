@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+<form name="login" action="/puzzle" method="post">
+    输入字谜:
+    <input type="text" name="puzzle" />
+</form>
+{%  if  answer  %}
+<h1>答案：{{answer}}</h1>
+{%  endif  %}
+{% endblock %}
