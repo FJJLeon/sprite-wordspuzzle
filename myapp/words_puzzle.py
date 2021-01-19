@@ -21,6 +21,24 @@ def loads_sprite():
     return sprite_names, sprite_names_counter
 
 
+def create_inverted_index(sprite_names):
+    inverted_index = {}
+    for name in sprite_names:
+        for word in set(name):
+            inverted_index.setdefault(word, set()).add(name)
+
+    return inverted_index
+
+
+def find_candidate_names(puzzle, inverted_index):
+    candidate_names = set()
+    puzzle = puzzle.replace("\t", "")
+    for word in puzzle:
+        candidate_names |= inverted_index[word]
+
+    return list(candidate_names)
+
+
 def solve_puzzle(puzzle, candidate_names):
     puzzle = puzzle.replace("\t", "")
     puzzle = puzzle.replace(" ", "")
@@ -33,17 +51,41 @@ def solve_puzzle(puzzle, candidate_names):
     return "不存在"
 
 
+def test_inverted_index():
+    sprite_names, sprite_names_counter = loads_sprite()
+    inverted_index = create_inverted_index(sprite_names)
+    print(inverted_index['兔'])
+    print(find_candidate_names("郎	喜	奴	乌	货	孙	娃	雨	知", inverted_index))
+
+
 def main():
     sprite_names, sprite_names_counter = loads_sprite()
     print(solve_puzzle("郎	喜	奴	乌	货	孙	娃	雨	知", sprite_names))
     while True:
         try:
             puzzle = input("输入字谜: ")
-            print(solve_puzzle(puzzle, sprite_names))
+            answer = solve_puzzle(puzzle, sprite_names)
+            print(answer)
+        except Exception as e:
+            print(e)
+            break
+
+
+def main_v2():
+    sprite_names, sprite_names_counter = loads_sprite()
+    inverted_index = create_inverted_index(sprite_names)
+    while True:
+        try:
+            puzzle = input("输入字谜: ")
+            candidate_name = find_candidate_names(puzzle, inverted_index)
+            answer = solve_puzzle(puzzle, candidate_name)
+            print(answer)
         except Exception as e:
             print(e)
             break
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    # test_inverted_index()
+    main_v2()
