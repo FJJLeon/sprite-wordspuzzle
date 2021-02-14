@@ -1,8 +1,10 @@
 # -*- coding: UTF-8 -*-
 import json
-from collections import Counter
+import os
+import psutil
+import sys
 import time
-import os, sys, psutil
+from collections import Counter
 
 sprite_data_url = "SpriteData.json"
 answer_url = "answer.txt"
@@ -21,7 +23,7 @@ def loads_sprite():
         sprite_names.append(sprite['name'])
         sprite_names_counter.append(Counter(sprite['name']))
 
-    return sprite_names, sprite_names_counter
+    return sprite_names
 
 
 def create_inverted_index(sprite_names):

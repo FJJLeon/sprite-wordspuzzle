@@ -21,5 +21,5 @@ def app_puzzle():
 
 
 if __name__ == '__main__':
-    sprite_names, _ = loads_sprite()
+    sprite_names = loads_sprite()
     app.run(host='0.0.0.0', debug=True)
