@@ -94,7 +94,7 @@ def loads_test_puzzles():
     puzzles = []
     with open(answer_url, mode='r') as load_file:
         lines = load_file.readlines()
-        for i in range(0, len(lines), 6):
+        for i in range(1, len(lines), 5):
             # print(lines[i])
             puzzles.append(lines[i].replace("\t", "").replace("\n", "").replace(" ", ""))
     return puzzles

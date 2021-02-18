@@ -12,9 +12,9 @@ class PuzzleSolver:
         self.url = sprite_data_url
         assert os.path.isfile(self.url)
         self.sprite_names = []
-        self.__load_data()
-
         self.inverted_index = {}
+
+        self.__load_data()
         self.__create_inverted_index()
 
     def __load_data(self):
@@ -47,13 +47,15 @@ class PuzzleSolver:
 
         candidate_names = self.__find_candidate_names(puzzle)
         puzzle_counter = Counter(list(puzzle))
+
+        answers = []
         for name in candidate_names:
             name_counter = Counter(name)
             if all(v <= puzzle_counter[k] for k, v in name_counter.items()):
-                return name
-        return "不存在"
+                answers.append(name)
+        return answers
 
 
 if __name__ == '__main__':
     test_solver = PuzzleSolver(SPRITE_DATA_URL)
-    print(test_solver.solve("帝	明	刀	风	蝶	不	鸟	喵	招  "))
+    print(test_solver.solve("句	军	心	完	玉	悟	俑	小	熊"))
